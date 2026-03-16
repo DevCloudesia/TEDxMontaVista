@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TEDxMontaVista</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --red:#e62b1e;
+  --red-glow:rgba(230,43,30,.15);
+  --bg:#060606;
+  --surface:#0e0e0e;
+  --surface2:#141414;
+  --surface3:#1a1a1a;
+  --text:#e8e8e8;
+  --text-dim:#777;
+  --text-muted:#444;
+  --border:rgba(255,255,255,.06);
+}
+html{scroll-behavior:smooth;background:var(--bg);color:var(--text)}
+body{font-family:'Space Grotesk',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* GRAIN OVERLAY */
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.025'/%3E%3C/svg%3E");
+  background-repeat:repeat;background-size:256px 256px;opacity:.6
+}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:100;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;transition:all .4s cubic-bezier(.16,1,.3,1)}
+nav.scrolled{padding:14px 48px;background:rgba(6,6,6,.92);backdrop-filter:blur(20px) saturate(1.2);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:baseline;gap:1px;font-weight:700;font-size:.9rem;letter-spacing:-.2px}
+.nav-logo .ted{color:#fff;background:var(--red);padding:3px 7px 2px;font-size:.7rem;letter-spacing:2px;font-weight:700;margin-right:1px}
+.nav-logo .x{color:var(--red);font-size:.6rem;font-weight:700;position:relative;top:-4px;margin-right:1px}
+.nav-links{display:flex;gap:32px;font-size:.78rem;font-weight:500;color:var(--text-dim);letter-spacing:.3px}
+.nav-links a{transition:color .25s;position:relative}
+.nav-links a:hover{color:var(--text)}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--red);transition:width .3s}
+.nav-links a:hover::after{width:100%}
+.nav-cta{background:transparent;color:var(--text);padding:8px 18px;border-radius:99px;font-weight:600;font-size:.75rem;border:1px solid rgba(255,255,255,.15);cursor:pointer;transition:all .3s;font-family:inherit;letter-spacing:.3px}
+.nav-cta:hover{border-color:var(--red);color:var(--red)}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:120px 48px 60px;gap:48px;position:relative}
+.hero-content{max-width:580px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.7rem;font-weight:500;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:32px}
+.hero-eyebrow::before{content:'';width:40px;height:1px;background:var(--red)}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,5.5vw,5.2rem);font-weight:900;line-height:.95;letter-spacing:-2px;margin-bottom:28px}
+.hero h1 em{font-style:italic;color:var(--red);font-weight:700}
+.hero .hero-desc{font-size:1rem;color:var(--text-dim);max-width:420px;line-height:1.8;font-weight:400}
+.hero-actions{margin-top:40px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;padding:14px 32px;border-radius:4px;font-weight:600;font-size:.85rem;border:none;cursor:pointer;font-family:inherit;letter-spacing:.2px;transition:all .25s}
+.btn-primary:hover{background:#c41e12;transform:translateY(-1px)}
+.btn-primary svg{width:16px;height:16px;transition:transform .25s}
+.btn-primary:hover svg{transform:translateX(3px)}
+.btn-ghost{font-size:.82rem;color:var(--text-dim);font-weight:500;cursor:pointer;border:none;background:none;font-family:inherit;border-bottom:1px solid var(--text-muted);padding-bottom:2px;transition:all .25s}
+.btn-ghost:hover{color:var(--text);border-color:var(--text)}
+
+/* HERO IMAGE */
+.hero-visual{position:relative;width:100%;height:480px;border-radius:10px;overflow:hidden}
+.hero-visual img{width:100%;height:100%;object-fit:cover;filter:brightness(.7) contrast(1.1)}
+.hero-visual::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(230,43,30,.12) 0%,transparent 60%);pointer-events:none}
+.hero-visual .hero-caption{position:absolute;bottom:20px;left:20px;font-size:.65rem;color:rgba(255,255,255,.5);letter-spacing:1px;text-transform:uppercase;font-weight:500}
+
+/* MARQUEE */
+.marquee-wrap{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:14px 0;overflow:hidden;position:relative}
+.marquee{display:flex;gap:48px;animation:scroll 25s linear infinite;width:max-content}
+.marquee span{font-size:.72rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);white-space:nowrap;display:flex;align-items:center;gap:12px}
+.marquee span::before{content:'';width:4px;height:4px;background:var(--red);border-radius:50%}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* SECTION COMMON */
+section{padding:100px 48px}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:500;color:var(--red);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.section-label::before{content:'';width:12px;height:1px;background:var(--red)}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:900;letter-spacing:-1px;line-height:1.1;margin-bottom:16px}
+.section-desc{color:var(--text-dim);max-width:440px;line-height:1.8;font-size:.9rem}
+
+/* UPCOMING EVENT — EDITORIAL LAYOUT */
+#upcoming{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.event-layout{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-top:48px}
+.event-visual{position:relative;aspect-ratio:4/3;border-radius:8px;overflow:hidden;background:var(--surface2)}
+.event-visual img{width:100%;height:100%;object-fit:cover;filter:brightness(.8) contrast(1.05)}
+.event-visual .date-badge{position:absolute;top:20px;left:20px;background:var(--red);color:#fff;padding:12px 16px;text-align:center;border-radius:6px;line-height:1}
+.date-badge .month{font-size:.6rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;display:block}
+.date-badge .day{font-size:1.6rem;font-weight:700;display:block;margin-top:2px;font-family:'JetBrains Mono',monospace}
+.event-details h3{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;letter-spacing:-.5px;line-height:1.15}
+.event-details .theme-line{font-style:italic;color:var(--red);font-size:.9rem;margin-top:6px;font-family:'Playfair Display',serif}
+.event-details p{color:var(--text-dim);line-height:1.8;margin-top:16px;font-size:.88rem}
+.event-meta{display:flex;flex-direction:column;gap:12px;margin-top:24px}
+.event-meta .meta-item{display:flex;align-items:center;gap:10px;font-size:.82rem;color:var(--text-dim)}
+.event-meta .meta-item .icon{width:32px;height:32px;border-radius:6px;background:rgba(230,43,30,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.event-meta .meta-item svg{width:14px;height:14px;stroke:var(--red);fill:none;stroke-width:2}
+
+/* DEADLINES ROW */
+.deadlines{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:48px;background:var(--border);border-radius:8px;overflow:hidden}
+.deadline-item{background:var(--surface2);padding:24px 28px;transition:background .3s}
+.deadline-item:hover{background:var(--surface3)}
+.deadline-item .dl-date{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--red);font-weight:500;letter-spacing:1px}
+.deadline-item h4{font-size:.88rem;font-weight:600;margin-top:6px}
+.deadline-item p{font-size:.75rem;color:var(--text-dim);margin-top:2px}
+
+/* CALENDAR */
+#calendar{padding-top:60px}
+.cal-grid{margin-top:40px;position:relative}
+.cal-grid::before{content:'';position:absolute;left:23px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--red),var(--border))}
+.cal-item{display:flex;gap:24px;padding:20px 0;position:relative}
+.cal-item + .cal-item{border-top:1px solid var(--border)}
+.cal-dot{width:9px;height:9px;border-radius:50%;background:var(--surface);border:2px solid var(--red);flex-shrink:0;margin-top:5px;position:relative;z-index:1}
+.cal-item:last-child .cal-dot{background:var(--red)}
+.cal-date{min-width:80px;flex-shrink:0}
+.cal-date .m{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--red);font-weight:500;letter-spacing:2px;text-transform:uppercase}
+.cal-date .d{font-size:1.5rem;font-weight:700;letter-spacing:-1px}
+.cal-body h4{font-size:.88rem;font-weight:600}
+.cal-body p{font-size:.78rem;color:var(--text-dim);margin-top:2px}
+.cal-tag{margin-left:auto;padding:4px 10px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:500;letter-spacing:.5px;text-transform:uppercase;flex-shrink:0;align-self:center}
+.cal-tag.meeting{background:rgba(230,43,30,.08);color:var(--red)}
+.cal-tag.deadline{background:rgba(255,180,0,.08);color:#d4a017}
+.cal-tag.event{background:rgba(0,200,120,.08);color:#00b36b}
+
+/* TALKS — STAGGERED */
+#talks{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.talks-header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:48px}
+.talks-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.talk-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:border-color .3s,transform .3s}
+.talk-card:hover{border-color:rgba(230,43,30,.2);transform:translateY(-2px)}
+.talk-card .talk-embed{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:var(--bg)}
+.talk-card .talk-embed iframe{width:100%;height:100%;border:none}
+.talk-card .talk-body{padding:18px 20px}
+.talk-card .speaker-name{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--red);font-weight:500;letter-spacing:1.5px;text-transform:uppercase}
+.talk-card h3{font-size:.92rem;font-weight:600;margin-top:6px;line-height:1.4}
+.talk-card p{font-size:.78rem;color:var(--text-dim);margin-top:6px;line-height:1.6}
+
+/* RESOURCES — NUMBERED */
+#resources .section-desc{margin-bottom:48px}
+.resources-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border-radius:8px;overflow:hidden}
+.resource-card{background:var(--surface);padding:36px 32px;position:relative;transition:background .3s}
+.resource-card:hover{background:var(--surface2)}
+.resource-card .res-number{font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:var(--surface3);position:absolute;top:16px;right:24px;line-height:1}
+.resource-card h3{font-size:1rem;font-weight:700;margin-bottom:8px;position:relative}
+.resource-card>p{font-size:.82rem;color:var(--text-dim);line-height:1.6;margin-bottom:16px;position:relative}
+.resource-card ul{list-style:none;display:flex;flex-direction:column;gap:8px;position:relative}
+.resource-card li{font-size:.78rem;color:var(--text-dim);padding-left:14px;position:relative;line-height:1.55}
+.resource-card li::before{content:'/';position:absolute;left:0;color:var(--red);font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.7rem}
+
+/* TEAM — MINIMAL */
+#team{border-top:1px solid var(--border)}
+.team-layout{display:flex;gap:60px;margin-top:48px;flex-wrap:wrap}
+.team-layout .team-text{max-width:320px;flex-shrink:0}
+.team-layout .team-text p{color:var(--text-dim);line-height:1.8;font-size:.88rem;margin-top:12px}
+.team-grid{flex:1;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:4px}
+.team-member{padding:20px 16px;text-align:center;background:var(--surface);border-radius:6px;transition:background .3s}
+.team-member:hover{background:var(--surface2)}
+.team-member .initials{width:48px;height:48px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:var(--text-dim);font-family:'JetBrains Mono',monospace;transition:border-color .3s}
+.team-member:hover .initials{border-color:var(--red)}
+.team-member h4{font-size:.82rem;font-weight:600}
+.team-member .role{font-size:.68rem;color:var(--red);font-weight:500;margin-top:3px;letter-spacing:.5px}
+
+/* CTA SECTION */
+.cta-section{text-align:center;padding:120px 48px;position:relative}
+.cta-section::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(230,43,30,.06) 0%,transparent 70%);pointer-events:none}
+.cta-section h2{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.6rem);font-weight:900;letter-spacing:-1.5px;line-height:1.05}
+.cta-section h2 em{font-style:italic;color:var(--red)}
+.cta-section>p{color:var(--text-dim);margin:16px auto 36px;max-width:400px;line-height:1.8;font-size:.9rem}
+.cta-card{display:inline-flex;align-items:center;gap:28px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:28px 40px;flex-wrap:wrap;justify-content:center;position:relative}
+.cta-card::before{content:'';position:absolute;left:0;top:12px;bottom:12px;width:3px;background:var(--red);border-radius:0 2px 2px 0}
+.cta-where{text-align:left}
+.cta-where .room{font-size:1.4rem;font-weight:700;letter-spacing:-.5px}
+.cta-where .when{font-size:.82rem;color:var(--text-dim);margin-top:2px}
+.cta-divider{width:1px;height:40px;background:var(--border)}
+.cta-text{font-size:.85rem;color:var(--text-dim);line-height:1.7;text-align:left;max-width:280px}
+.cta-email{margin-top:24px;font-size:.78rem;color:var(--text-muted)}
+.cta-email a{color:var(--text-dim);border-bottom:1px solid var(--text-muted);transition:all .2s}
+.cta-email a:hover{color:var(--red);border-color:var(--red)}
+
+/* FOOTER */
+footer{padding:32px 48px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-left{font-size:.75rem;color:var(--text-dim)}
+.footer-left strong{color:var(--text);font-weight:600}
+.footer-right{font-size:.65rem;color:var(--text-muted);max-width:400px;text-align:right;line-height:1.5}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:#222;border-radius:2px}
+
+/* ANIMATIONS */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.reveal.vis{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:14px 24px}nav.scrolled{padding:10px 24px}
+  .nav-links{display:none}
+  section,.hero,.cta-section{padding-left:24px;padding-right:24px}
+  footer{padding:24px}
+  .hero{grid-template-columns:1fr;min-height:auto;padding-top:100px}
+  .hero h1{font-size:clamp(2.4rem,8vw,3.6rem)}
+  .hero-visual{height:300px}
+  .event-layout{grid-template-columns:1fr;gap:32px}
+  .deadlines{grid-template-columns:1fr}
+  .talks-grid{grid-template-columns:1fr}
+  .resources-grid{grid-template-columns:1fr}
+  .team-layout{flex-direction:column;gap:32px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo"><span class="ted">TED</span><span class="x">x</span>MontaVista</div>
+  <div class="nav-links">
+    <a href="#upcoming">Events</a>
+    <a href="#calendar">Calendar</a>
+    <a href="#talks">Talks</a>
+    <a href="#resources">Resources</a>
+    <a href="#team">Team</a>
+  </div>
+  <button class="nav-cta" onclick="document.getElementById('join').scrollIntoView({behavior:'smooth'})">A112 &middot; Thursdays</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow reveal">TEDxMontaVista &mdash; Room A112 Every Thursday</div>
+    <h1 class="reveal reveal-delay-1">Ideas worth<br>spreading<br><em>start here.</em></h1>
+    <p class="hero-desc reveal reveal-delay-2">We're a student-run club at Monta Vista High. We put on talks, run workshops, and build a community around ideas that actually matter. No applications &mdash; just show up.</p>
+    <div class="hero-actions reveal reveal-delay-3">
+      <button class="btn-primary" onclick="document.getElementById('join').scrollIntoView({behavior:'smooth'})">Join us Thursdays <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+      <button class="btn-ghost" onclick="document.getElementById('upcoming').scrollIntoView({behavior:'smooth'})">See what's next</button>
+    </div>
+  </div>
+  <div class="hero-visual reveal reveal-delay-2">
+    <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&h=1000&fit=crop" alt="Speaker on stage under spotlight">
+    <div class="hero-caption">Ideas worth spreading</div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee">
+    <span>Ideas Worth Spreading</span><span>Monta Vista High School</span><span>Cupertino, CA</span><span>Student Led</span><span>Independently Organized</span><span>Every Thursday</span><span>Room A112</span><span>Ideas Worth Spreading</span><span>Monta Vista High School</span><span>Cupertino, CA</span><span>Student Led</span><span>Independently Organized</span><span>Every Thursday</span><span>Room A112</span>
+  </div>
+</div>
+
+<!-- UPCOMING EVENT -->
+<section id="upcoming">
+  <div class="section-label reveal">Next Event</div>
+  <div class="section-title reveal">Upcoming Event</div>
+
+  <div class="event-layout">
+    <div class="event-visual reveal">
+      <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&h=600&fit=crop" alt="TEDx event stage">
+      <div class="date-badge"><span class="month">May</span><span class="day">17</span></div>
+    </div>
+    <div class="event-details reveal">
+      <h3>TEDxMontaVista 2026</h3>
+      <div class="theme-line">"Uncharted" &mdash; exploring the unknown</div>
+      <p>An evening of student-led talks on breakthrough ideas, untold stories, and bold visions for the future. Open to the entire MVHS community.</p>
+      <div class="event-meta">
+        <div class="meta-item">
+          <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <span>5:00 &ndash; 8:00 PM</span>
+        </div>
+        <div class="meta-item">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <span>MVHS Theater</span>
+        </div>
+        <div class="meta-item">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+          <span>Free admission &mdash; open to all</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="deadlines reveal">
+    <div class="deadline-item">
+      <div class="dl-date">Apr 15, 2026</div>
+      <h4>Speaker Applications Due</h4>
+      <p>Submit your talk idea via the Google Form</p>
+    </div>
+    <div class="deadline-item">
+      <div class="dl-date">May 01, 2026</div>
+      <h4>Volunteer Sign-ups Close</h4>
+      <p>Last day to register as an event volunteer</p>
+    </div>
+    <div class="deadline-item">
+      <div class="dl-date">May 10, 2026</div>
+      <h4>Dress Rehearsal</h4>
+      <p>Mandatory for all selected speakers</p>
+    </div>
+  </div>
+</section>
+
+<!-- CALENDAR -->
+<section id="calendar" style="padding-top:60px">
+  <div class="section-label reveal">Schedule</div>
+  <div class="section-title reveal">What's coming up</div>
+
+  <div class="cal-grid reveal">
+    <div class="cal-item">
+      <div class="cal-dot"></div>
+      <div class="cal-date"><div class="m">Mar</div><div class="d">21</div></div>
+      <div class="cal-body"><h4>General Body Meeting</h4><p>Room 204 &mdash; Club updates & planning</p></div>
+      <span class="cal-tag meeting">Meeting</span>
+    </div>
+    <div class="cal-item">
+      <div class="cal-dot"></div>
+      <div class="cal-date"><div class="m">Apr</div><div class="d">04</div></div>
+      <div class="cal-body"><h4>Workshop: Storytelling for Speakers</h4><p>Library &mdash; Open to all students</p></div>
+      <span class="cal-tag event">Workshop</span>
+    </div>
+    <div class="cal-item">
+      <div class="cal-dot"></div>
+      <div class="cal-date"><div class="m">Apr</div><div class="d">15</div></div>
+      <div class="cal-body"><h4>Speaker Applications Close</h4><p>Submit via Google Form by 11:59 PM</p></div>
+      <span class="cal-tag deadline">Deadline</span>
+    </div>
+    <div class="cal-item">
+      <div class="cal-dot"></div>
+      <div class="cal-date"><div class="m">Apr</div><div class="d">25</div></div>
+      <div class="cal-body"><h4>Speaker Selection Announced</h4><p>Check your email for results</p></div>
+      <span class="cal-tag event">Update</span>
+    </div>
+    <div class="cal-item">
+      <div class="cal-dot"></div>
+      <div class="cal-date"><div class="m">May</div><div class="d">01</div></div>
+      <div class="cal-body"><h4>Volunteer Sign-ups Close</h4><p>Last day to register</p></div>
+      <span class="cal-tag deadline">Deadline</span>
+    </div>
+    <div class="cal-item">
+      <div class="cal-dot"></div>
+      <div class="cal-date"><div class="m">May</div><div class="d">10</div></div>
+      <div class="cal-body"><h4>Full Dress Rehearsal</h4><p>MVHS Theater &mdash; Mandatory for speakers</p></div>
+      <span class="cal-tag meeting">Rehearsal</span>
+    </div>
+    <div class="cal-item">
+      <div class="cal-dot"></div>
+      <div class="cal-date"><div class="m">May</div><div class="d">17</div></div>
+      <div class="cal-body"><h4>TEDxMontaVista 2026: "Uncharted"</h4><p>MVHS Theater &mdash; Doors open 4:30 PM</p></div>
+      <span class="cal-tag event">Main Event</span>
+    </div>
+  </div>
+</section>
+
+<!-- TALKS -->
+<section id="talks">
+  <div class="talks-header">
+    <div>
+      <div class="section-label reveal">Watch & Learn</div>
+      <div class="section-title reveal">Talks we love</div>
+      <p class="section-desc reveal">Great inspiration if you're thinking about giving a talk yourself.</p>
+    </div>
+  </div>
+  <div class="talks-grid">
+    <div class="talk-card reveal">
+      <div class="talk-embed">
+        <iframe src="https://www.youtube.com/embed/arj7oStGLkU" title="Tim Urban - Inside the Mind of a Master Procrastinator" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="origin" allowfullscreen></iframe>
+      </div>
+      <div class="talk-body">
+        <div class="speaker-name">Tim Urban</div>
+        <h3>Inside the Mind of a Master Procrastinator</h3>
+        <p>60M+ views for a reason &mdash; hilarious, relatable, and a masterclass in using visuals to land a message.</p>
+      </div>
+    </div>
+    <div class="talk-card reveal reveal-delay-1">
+      <div class="talk-embed">
+        <iframe src="https://www.youtube.com/embed/BHY0FxzoKZE" title="Wendy Suzuki - The Brain-Changing Benefits of Exercise" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="origin" allowfullscreen></iframe>
+      </div>
+      <div class="talk-body">
+        <div class="speaker-name">Wendy Suzuki</div>
+        <h3>The Brain-Changing Benefits of Exercise</h3>
+        <p>A neuroscientist breaks down how exercise transforms your brain &mdash; science storytelling done right.</p>
+      </div>
+    </div>
+    <div class="talk-card reveal">
+      <div class="talk-embed">
+        <iframe src="https://www.youtube.com/embed/CWMnZPGpaQw" title="Natasha Pearl Hansen - Why Laughter Heals Broken Hearts" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="origin" allowfullscreen></iframe>
+      </div>
+      <div class="talk-body">
+        <div class="speaker-name">Natasha Pearl Hansen</div>
+        <h3>Why Laughter Heals Broken Hearts</h3>
+        <p>From TEDxChicago &mdash; humor carrying serious emotional weight. A warm, standout talk.</p>
+      </div>
+    </div>
+    <div class="talk-card reveal reveal-delay-1">
+      <div class="talk-embed">
+        <iframe src="https://www.youtube.com/embed/-zdJ1ubvoXs" title="Shirzad Chamine - Know Your Inner Saboteurs" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="origin" allowfullscreen></iframe>
+      </div>
+      <div class="talk-body">
+        <div class="speaker-name">Shirzad Chamine</div>
+        <h3>Know Your Inner Saboteurs</h3>
+        <p>From TEDxStanford &mdash; self-awareness and mental fitness that changes how you show up on stage and in life.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESOURCES -->
+<section id="resources">
+  <div class="section-label reveal">Prepare</div>
+  <div class="section-title reveal">Speaker resources</div>
+  <p class="section-desc reveal">Whether it's your first talk or your fifth, these will help you craft something memorable.</p>
+
+  <div class="resources-grid reveal" style="margin-top:48px">
+    <div class="resource-card">
+      <div class="res-number">01</div>
+      <h3>Finding Your Idea</h3>
+      <p>Every great talk starts with one idea you genuinely care about.</p>
+      <ul>
+        <li>Pick ONE thing &mdash; not three, not five</li>
+        <li>Make it personal. Why does this keep you up at night?</li>
+        <li>Ask yourself: what should the audience think differently after?</li>
+        <li>Run it by a friend. If they lean in, you're onto something</li>
+      </ul>
+    </div>
+    <div class="resource-card">
+      <div class="res-number">02</div>
+      <h3>Writing It</h3>
+      <p>Structure is what makes the difference between rambling and riveting.</p>
+      <ul>
+        <li>Open with a hook &mdash; a question, a moment, a surprise</li>
+        <li>Follow the arc: What &rarr; So What &rarr; Now What</li>
+        <li>Shoot for 8&ndash;12 minutes (~1,200&ndash;1,800 words)</li>
+        <li>End on something your audience will actually remember</li>
+      </ul>
+    </div>
+    <div class="resource-card">
+      <div class="res-number">03</div>
+      <h3>Delivering It</h3>
+      <p>You've written something great. Now make people feel it.</p>
+      <ul>
+        <li>Rehearse out loud at least 10 times (yes, really)</li>
+        <li>Record yourself. It's painful but it works</li>
+        <li>Pauses > filler words. Silence is your friend</li>
+        <li>Move with intention, not because you're nervous</li>
+      </ul>
+    </div>
+    <div class="resource-card">
+      <div class="res-number">04</div>
+      <h3>Designing Slides</h3>
+      <p>Your slides should support what you're saying, not repeat it.</p>
+      <ul>
+        <li>One idea per slide &mdash; that's it</li>
+        <li>Use images instead of bullet points</li>
+        <li>Under 10 words per slide</li>
+        <li>Dark backgrounds, minimal transitions</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="team-layout">
+    <div class="team-text reveal">
+      <div class="section-label">Our People</div>
+      <div class="section-title">Leadership</div>
+      <p>The students behind TEDxMontaVista. We handle everything from speaker coaching to stage design.</p>
+    </div>
+    <div class="team-grid reveal">
+      <div class="team-member"><div class="initials">P</div><h4>Your Name</h4><div class="role">President</div></div>
+      <div class="team-member"><div class="initials">VP</div><h4>Your Name</h4><div class="role">Vice President</div></div>
+      <div class="team-member"><div class="initials">S</div><h4>Your Name</h4><div class="role">Secretary</div></div>
+      <div class="team-member"><div class="initials">T</div><h4>Your Name</h4><div class="role">Treasurer</div></div>
+      <div class="team-member"><div class="initials">EL</div><h4>Your Name</h4><div class="role">Events Lead</div></div>
+      <div class="team-member"><div class="initials">SC</div><h4>Your Name</h4><div class="role">Speaker Coach</div></div>
+      <div class="team-member"><div class="initials">ML</div><h4>Your Name</h4><div class="role">Marketing Lead</div></div>
+      <div class="team-member"><div class="initials">TL</div><h4>Your Name</h4><div class="role">Tech Lead</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN CTA -->
+<section id="join" class="cta-section">
+  <div class="reveal">
+    <div class="section-label" style="justify-content:center">Get Involved</div>
+    <h2>Your idea deserves<br>a <em>stage.</em></h2>
+    <p>No applications, no tryouts. Just show up.</p>
+    <div class="cta-card">
+      <div class="cta-where">
+        <div class="room">Room A112</div>
+        <div class="when">Every Thursday</div>
+      </div>
+      <div class="cta-divider"></div>
+      <div class="cta-text">Come hang out, hear about upcoming events, and find out how you can get involved.</div>
+    </div>
+    <div class="cta-email">Questions? <a href="mailto:tedxmontavista@gmail.com">tedxmontavista@gmail.com</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-left"><strong>TEDxMontaVista</strong> &middot; Monta Vista High School &middot; Cupertino, CA</div>
+  <div class="footer-right">This independent TEDx event is operated under license from TED. TEDx, x&nbsp;=&nbsp;independently organized event.</div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(el => { if (el.isIntersecting) el.target.classList.add('vis') });
+}, { threshold: .1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+window.addEventListener('scroll', () => {
+  document.querySelector('nav').classList.toggle('scrolled', scrollY > 40);
+});
+</script>
+</body>
+</html>
