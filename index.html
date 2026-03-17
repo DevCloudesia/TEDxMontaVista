@@ -46,7 +46,7 @@ nav.scrolled{padding:14px 48px;background:rgba(6,6,6,.92);backdrop-filter:blur(2
 .nav-cta:hover{border-color:var(--red);color:var(--red)}
 
 /* HERO */
-.hero{display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:120px 48px 60px;gap:48px;position:relative}
+.hero{display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:100px 48px 40px;gap:48px;position:relative}
 .hero-content{max-width:580px}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.7rem;font-weight:500;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:32px}
 .hero-eyebrow::before{content:'';width:40px;height:1px;background:var(--red)}
@@ -97,16 +97,13 @@ section{padding:100px 48px}
 .event-meta .meta-item .icon{width:32px;height:32px;border-radius:6px;background:rgba(230,43,30,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .event-meta .meta-item svg{width:14px;height:14px;stroke:var(--red);fill:none;stroke-width:2}
 
-/* DEADLINES ROW */
-.deadlines{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:48px;background:var(--border);border-radius:8px;overflow:hidden}
-.deadline-item{background:var(--surface2);padding:24px 28px;transition:background .3s}
-.deadline-item:hover{background:var(--surface3)}
-.deadline-item .dl-date{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--red);font-weight:500;letter-spacing:1px}
-.deadline-item h4{font-size:.88rem;font-weight:600;margin-top:6px}
-.deadline-item p{font-size:.75rem;color:var(--text-dim);margin-top:2px}
 
 /* CALENDAR */
-#calendar{padding-top:60px}
+#calendar{padding-top:80px}
+.cal-phase{margin-top:48px;margin-bottom:16px;padding-left:24px;border-left:3px solid var(--red)}
+.cal-phase-label{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;letter-spacing:-.5px}
+.cal-phase-sub{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text-dim);letter-spacing:1px;text-transform:uppercase;margin-top:4px}
+.cal-phase:first-of-type{margin-top:32px}
 .cal-grid{margin-top:40px;position:relative}
 .cal-grid::before{content:'';position:absolute;left:23px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--red),var(--border))}
 .cal-item{display:flex;gap:24px;padding:20px 0;position:relative}
@@ -206,7 +203,6 @@ footer{padding:32px 48px;border-top:1px solid var(--border);display:flex;justify
   .hero h1{font-size:clamp(2.4rem,8vw,3.6rem)}
   .hero-visual{height:300px}
   .event-layout{grid-template-columns:1fr;gap:32px}
-  .deadlines{grid-template-columns:1fr}
   .talks-grid{grid-template-columns:1fr}
   .resources-grid{grid-template-columns:1fr}
   .team-layout{flex-direction:column;gap:32px}
@@ -254,99 +250,181 @@ footer{padding:32px 48px;border-top:1px solid var(--border);display:flex;justify
 <!-- UPCOMING EVENT -->
 <section id="upcoming">
   <div class="section-label reveal">Next Event</div>
-  <div class="section-title reveal">Upcoming Event</div>
+  <div class="section-title reveal">TEDxMontaVista Event 1</div>
 
   <div class="event-layout">
     <div class="event-visual reveal">
       <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&h=600&fit=crop" alt="TEDx event stage">
-      <div class="date-badge"><span class="month">May</span><span class="day">17</span></div>
+      <div class="date-badge"><span class="month">Nov</span><span class="day">27</span></div>
     </div>
     <div class="event-details reveal">
-      <h3>TEDxMontaVista 2026</h3>
-      <div class="theme-line">"Uncharted" &mdash; exploring the unknown</div>
-      <p>An evening of student-led talks on breakthrough ideas, untold stories, and bold visions for the future. Open to the entire MVHS community.</p>
+      <h3>TEDxMontaVista Event 1</h3>
+      <div class="theme-line">Fall Semester &mdash; Friday, November 27</div>
+      <p>An evening of student-led talks built from scratch over 11 weeks. Every speaker writes, rehearses, and delivers a real TEDx-style talk. Open to the entire MVHS community.</p>
       <div class="event-meta">
         <div class="meta-item">
-          <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-          <span>5:00 &ndash; 8:00 PM</span>
+          <div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+          <span>Friday, November 27</span>
         </div>
         <div class="meta-item">
           <div class="icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-          <span>MVHS Theater</span>
+          <span>Monta Vista High School</span>
         </div>
         <div class="meta-item">
           <div class="icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
-          <span>Free admission &mdash; open to all</span>
+          <span>Free &amp; open to all &mdash; no applications, just show up</span>
         </div>
       </div>
-    </div>
-  </div>
-
-  <div class="deadlines reveal">
-    <div class="deadline-item">
-      <div class="dl-date">Apr 15, 2026</div>
-      <h4>Speaker Applications Due</h4>
-      <p>Submit your talk idea via the Google Form</p>
-    </div>
-    <div class="deadline-item">
-      <div class="dl-date">May 01, 2026</div>
-      <h4>Volunteer Sign-ups Close</h4>
-      <p>Last day to register as an event volunteer</p>
-    </div>
-    <div class="deadline-item">
-      <div class="dl-date">May 10, 2026</div>
-      <h4>Dress Rehearsal</h4>
-      <p>Mandatory for all selected speakers</p>
     </div>
   </div>
 </section>
 
 <!-- CALENDAR -->
-<section id="calendar" style="padding-top:60px">
-  <div class="section-label reveal">Schedule</div>
-  <div class="section-title reveal">What's coming up</div>
+<section id="calendar">
+  <div class="section-label reveal">Fall Semester</div>
+  <div class="section-title reveal">Full schedule</div>
+  <p class="section-desc reveal">Every Thursday in A112. Here's the week-by-week plan leading to Event 1.</p>
+
+  <!-- PHASE 1 -->
+  <div class="cal-phase reveal">
+    <div class="cal-phase-label">Phase 1: Foundations</div>
+    <div class="cal-phase-sub">Weeks 1&ndash;2</div>
+  </div>
 
   <div class="cal-grid reveal">
     <div class="cal-item">
       <div class="cal-dot"></div>
-      <div class="cal-date"><div class="m">Mar</div><div class="d">21</div></div>
-      <div class="cal-body"><h4>General Body Meeting</h4><p>Room 204 &mdash; Club updates & planning</p></div>
-      <span class="cal-tag meeting">Meeting</span>
+      <div class="cal-date"><div class="m">Sep</div><div class="d">17</div></div>
+      <div class="cal-body">
+        <h4>Interest Meeting</h4>
+        <p>Watch Tim Urban's talk as a group. Discuss what makes a TED talk. Learn what makes a strong topic. Start thinking about your idea.</p>
+      </div>
+      <span class="cal-tag meeting">Week 1</span>
     </div>
     <div class="cal-item">
       <div class="cal-dot"></div>
-      <div class="cal-date"><div class="m">Apr</div><div class="d">04</div></div>
-      <div class="cal-body"><h4>Workshop: Storytelling for Speakers</h4><p>Library &mdash; Open to all students</p></div>
-      <span class="cal-tag event">Workshop</span>
+      <div class="cal-date"><div class="m">Sep</div><div class="d">24</div></div>
+      <div class="cal-body">
+        <h4>Topics &amp; Hooks</h4>
+        <p>TEDx values quiz. Brainstorm and pitch your idea in 1 min. Learn the types of hooks. Homework: pitch form + write your opening 30 seconds.</p>
+      </div>
+      <span class="cal-tag meeting">Week 2</span>
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="cal-phase reveal">
+    <div class="cal-phase-label">Phase 2: Writing</div>
+    <div class="cal-phase-sub">Weeks 3&ndash;7</div>
+  </div>
+
+  <div class="cal-grid reveal">
+    <div class="cal-item">
+      <div class="cal-dot"></div>
+      <div class="cal-date"><div class="m">Oct</div><div class="d">01</div></div>
+      <div class="cal-body">
+        <h4>The &ldquo;What&rdquo; Part 1 &mdash; Finding Your Story</h4>
+        <p>Share hooks in pairs. Learn the &ldquo;What&rdquo; section: your personal story, not a list of facts. Watch Bren&eacute; Brown clip. Homework: write ~250 words.</p>
+      </div>
+      <span class="cal-tag meeting">Week 3</span>
     </div>
     <div class="cal-item">
       <div class="cal-dot"></div>
-      <div class="cal-date"><div class="m">Apr</div><div class="d">15</div></div>
-      <div class="cal-body"><h4>Speaker Applications Close</h4><p>Submit via Google Form by 11:59 PM</p></div>
-      <span class="cal-tag deadline">Deadline</span>
+      <div class="cal-date"><div class="m">Oct</div><div class="d">08</div></div>
+      <div class="cal-body">
+        <h4>The &ldquo;What&rdquo; Part 2 &mdash; Making It Hit</h4>
+        <p>Read story openings out loud. Go deeper: emotional turns, tension, vulnerability. Watch Natasha Pearl Hansen clip. Homework: finish your &ldquo;What&rdquo; (400&ndash;500 words).</p>
+      </div>
+      <span class="cal-tag meeting">Week 4</span>
     </div>
     <div class="cal-item">
       <div class="cal-dot"></div>
-      <div class="cal-date"><div class="m">Apr</div><div class="d">25</div></div>
-      <div class="cal-body"><h4>Speaker Selection Announced</h4><p>Check your email for results</p></div>
-      <span class="cal-tag event">Update</span>
+      <div class="cal-date"><div class="m">Oct</div><div class="d">15</div></div>
+      <div class="cal-body">
+        <h4>The &ldquo;So What&rdquo; &mdash; Why Your Idea Matters</h4>
+        <p>Watch Chimamanda Adichie clip. Peer review &ldquo;What&rdquo; sections. Learn to zoom out and connect your story to something universal. Homework: finish &ldquo;So What&rdquo; (300&ndash;400 words).</p>
+      </div>
+      <span class="cal-tag meeting">Week 5</span>
     </div>
     <div class="cal-item">
       <div class="cal-dot"></div>
-      <div class="cal-date"><div class="m">May</div><div class="d">01</div></div>
-      <div class="cal-body"><h4>Volunteer Sign-ups Close</h4><p>Last day to register</p></div>
-      <span class="cal-tag deadline">Deadline</span>
+      <div class="cal-date"><div class="m">Oct</div><div class="d">22</div></div>
+      <div class="cal-body">
+        <h4>The &ldquo;Now What&rdquo; &mdash; Your Solution &amp; Closing</h4>
+        <p>Write your payoff: what should the audience do, think, or feel differently? Learn how to write a memorable closing. Homework: full draft (1,200&ndash;1,500 words).</p>
+      </div>
+      <span class="cal-tag meeting">Week 6</span>
     </div>
     <div class="cal-item">
       <div class="cal-dot"></div>
-      <div class="cal-date"><div class="m">May</div><div class="d">10</div></div>
-      <div class="cal-body"><h4>Full Dress Rehearsal</h4><p>MVHS Theater &mdash; Mandatory for speakers</p></div>
-      <span class="cal-tag meeting">Rehearsal</span>
+      <div class="cal-date"><div class="m">Oct</div><div class="d">29</div></div>
+      <div class="cal-body">
+        <h4>Full Draft Review</h4>
+        <p>Drafts due. Read-through in groups of 4. Feedback: did you follow the idea? Strongest part? Volunteer sign-ups for event day. Homework: revise based on feedback.</p>
+      </div>
+      <span class="cal-tag deadline">Week 7</span>
+    </div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="cal-phase reveal">
+    <div class="cal-phase-label">Phase 3: Delivery &amp; Rehearsal</div>
+    <div class="cal-phase-sub">Weeks 8&ndash;10</div>
+  </div>
+
+  <div class="cal-grid reveal">
+    <div class="cal-item">
+      <div class="cal-dot"></div>
+      <div class="cal-date"><div class="m">Nov</div><div class="d">05</div></div>
+      <div class="cal-body">
+        <h4>Delivery &amp; Slides</h4>
+        <p>Watch Wendy Suzuki's talk. Discuss delivery: eye contact, movement, vocal variety, pauses. Learn TED-style slides. Homework: memorize talk + build slides (8&ndash;15 max).</p>
+      </div>
+      <span class="cal-tag meeting">Week 8</span>
     </div>
     <div class="cal-item">
       <div class="cal-dot"></div>
-      <div class="cal-date"><div class="m">May</div><div class="d">17</div></div>
-      <div class="cal-body"><h4>TEDxMontaVista 2026: "Uncharted"</h4><p>MVHS Theater &mdash; Doors open 4:30 PM</p></div>
+      <div class="cal-date"><div class="m">Nov</div><div class="d">12</div></div>
+      <div class="cal-body">
+        <h4>Slide Workshop + Mock 1</h4>
+        <p>Peer review slides in pairs. Practice delivering with slides. After school: MOCK 1 &mdash; full run-throughs with timed feedback on content, delivery, and slides.</p>
+      </div>
+      <span class="cal-tag event">Week 9</span>
+    </div>
+    <div class="cal-item">
+      <div class="cal-dot"></div>
+      <div class="cal-date"><div class="m">Nov</div><div class="d">19</div></div>
+      <div class="cal-body">
+        <h4>Revisions + Mock 2</h4>
+        <p>Go over Mock 1 feedback. Revise scripts, tighten delivery, fix slides. After school: MOCK 2 &mdash; final dress rehearsal with slides, timing, and transitions.</p>
+      </div>
+      <span class="cal-tag event">Week 10</span>
+    </div>
+  </div>
+
+  <!-- PHASE 4 -->
+  <div class="cal-phase reveal">
+    <div class="cal-phase-label">Phase 4: Event Week</div>
+    <div class="cal-phase-sub">Week 11</div>
+  </div>
+
+  <div class="cal-grid reveal">
+    <div class="cal-item">
+      <div class="cal-dot"></div>
+      <div class="cal-date"><div class="m">Nov</div><div class="d">26</div></div>
+      <div class="cal-body">
+        <h4>Hype Meeting</h4>
+        <p>No new work. Logistics review: schedule, arrival time, tech check, dress code. Quick final practice if needed. You're ready.</p>
+      </div>
+      <span class="cal-tag meeting">Week 11</span>
+    </div>
+    <div class="cal-item">
+      <div class="cal-dot"></div>
+      <div class="cal-date"><div class="m">Nov</div><div class="d">27</div></div>
+      <div class="cal-body">
+        <h4>TEDxMontaVista EVENT 1</h4>
+        <p>The main event. Student speakers take the stage.</p>
+      </div>
       <span class="cal-tag event">Main Event</span>
     </div>
   </div>
@@ -364,7 +442,7 @@ footer{padding:32px 48px;border-top:1px solid var(--border);display:flex;justify
   <div class="talks-grid">
     <div class="talk-card reveal">
       <div class="talk-embed">
-        <iframe src="https://www.youtube.com/embed/arj7oStGLkU" title="Tim Urban - Inside the Mind of a Master Procrastinator" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="origin" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/arj7oStGLkU" title="Tim Urban - Inside the Mind of a Master Procrastinator" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
       <div class="talk-body">
         <div class="speaker-name">Tim Urban</div>
@@ -374,7 +452,7 @@ footer{padding:32px 48px;border-top:1px solid var(--border);display:flex;justify
     </div>
     <div class="talk-card reveal reveal-delay-1">
       <div class="talk-embed">
-        <iframe src="https://www.youtube.com/embed/BHY0FxzoKZE" title="Wendy Suzuki - The Brain-Changing Benefits of Exercise" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="origin" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/BHY0FxzoKZE" title="Wendy Suzuki - The Brain-Changing Benefits of Exercise" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
       <div class="talk-body">
         <div class="speaker-name">Wendy Suzuki</div>
@@ -384,7 +462,7 @@ footer{padding:32px 48px;border-top:1px solid var(--border);display:flex;justify
     </div>
     <div class="talk-card reveal">
       <div class="talk-embed">
-        <iframe src="https://www.youtube.com/embed/CWMnZPGpaQw" title="Natasha Pearl Hansen - Why Laughter Heals Broken Hearts" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="origin" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/CWMnZPGpaQw" title="Natasha Pearl Hansen - Why Laughter Heals Broken Hearts" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
       <div class="talk-body">
         <div class="speaker-name">Natasha Pearl Hansen</div>
@@ -394,7 +472,7 @@ footer{padding:32px 48px;border-top:1px solid var(--border);display:flex;justify
     </div>
     <div class="talk-card reveal reveal-delay-1">
       <div class="talk-embed">
-        <iframe src="https://www.youtube.com/embed/-zdJ1ubvoXs" title="Shirzad Chamine - Know Your Inner Saboteurs" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="origin" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/-zdJ1ubvoXs" title="Shirzad Chamine - Know Your Inner Saboteurs" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
       <div class="talk-body">
         <div class="speaker-name">Shirzad Chamine</div>
